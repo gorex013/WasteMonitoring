@@ -1,0 +1,20 @@
+{% extends 'modal-base.html' %}
+{% with modal_id='logoutModal' %}
+    {% block modal-trigger-widget %}
+        <a class="text-danger dropdown-item" data-toggle="modal" data-target="#logoutModal"><i
+                class="bi bi-box-arrow-right"></i>Logout</a>
+    {% endblock %}
+    {% block modal-header %}
+        <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
+    {% endblock %}
+    {% block modal-body %}
+        Are you sure you want to log out?
+    {% endblock %}
+    {% block modal-footer %}
+
+        <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-outline-danger" onclick="location.href ='{% url 'logout' %}';">
+            Yes
+        </button>
+    {% endblock %}
+{% endwith %}
