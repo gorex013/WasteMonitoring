@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">{{ APP_NAME }}</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Monitor deșeuri</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,25 +7,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'home' %}"><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Services
+                    Statistici
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <button class="primary outline"><i class="bi bi-alarm"></i></button>
-                    <i class="bi bi-alarm-fill"></i>
+                    <a class="dropdown-item text-danger"><i class="bi bi-graph-up"></i>Evoluția cantității de masă
+                        plastică</a>
+                    <a class="dropdown-item text-warning"><i class="bi bi-graph-up"></i>Evoluția cantității de
+                        metal/sticlă</a>
+                    <a class="dropdown-item text-success"><i class="bi bi-graph-up"></i>Evoluția cantității de deșeuri
+                        biodegradabile</a>
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            {% include 'registration/login-modal.html' with modal_id='loginModal'%}
-            <button class="btn btn-outline-success mr-2 my-sm-0" type="button">
-                <i class="bi bi-check-circle"></i>
-                Register
-            </button>
-        </form>
+        <div class="my-2 my-lg-0">
+            {% include 'registration/login-modal.html' with modal_id='loginModal' %}
+            {% include 'registration/signup-modal.html' with modal_id='signupModal' %}
+        </div>
     </div>
 </nav>
