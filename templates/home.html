@@ -11,6 +11,19 @@
             background-size: cover;
         }
     </style>
+    <script>
+        function show_hide_password(passwordInput, show, hide) {
+            if (passwordInput.attr('type') === 'password') {
+                show.hide();
+                hide.show();
+                passwordInput.attr('type', 'text');
+            } else {
+                show.show();
+                hide.hide();
+                passwordInput.attr('type', 'password');
+            }
+        }
+    </script>
 {% endblock %}
 {% block navbar %}
     {% include 'navbar.html' %}
