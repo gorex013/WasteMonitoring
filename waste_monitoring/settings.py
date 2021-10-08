@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-2)e@^%ol!nu3w@*&(wxkp^l@hnqh=5z&nvr^lqrh&sa^mz4+2%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 
 # Application definition
 
@@ -77,13 +77,9 @@ DATABASES = {
         'NAME': 'waste',
         'USER': 'root_user',
         'PASSWORD': 'The_root_user1',
-        'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+        'HOST': 'db',  # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     },
-    # {
-    # 'ENGINE': 'django.db.backends.sqlite3',
-    # 'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
 
 # Password validation
