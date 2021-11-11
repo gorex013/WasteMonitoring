@@ -10,73 +10,9 @@
     <h5 class="modal-title" id="exampleModalLongTitle">Înregistrare</h5>
 {% endblock %}
 {% block modal-body %}
-    <form class="col-12 my-auto" method="post" action="{% url 'signup' %}">
-        {% csrf_token %}
-        <div class="form-group mb-3">
-            <div class="input-group">
-                <input name="first_name" type="text" class="form-control" id="firstName"
-                       aria-describedby="emailHelp"
-                       placeholder="Nume" required/>
-            </div>
-        </div>
-        <div class="form-group mb-3">
-            <div class="input-group">
-                <input name="last_name" type="text" class="form-control" id="lastName"
-                       aria-describedby="emailHelp"
-                       placeholder="Prenume" required/>
-            </div>
-        </div>
-        <div class="form-group mb-3">
-            <div class="input-group">
-                <span class="input-group-text mt-0 bi bi-person-fill"></span>
-                <input name="username" type="email" class="form-control"
-                       placeholder="Email" required/>
-            </div>
-            {% if form.username.errors %}
-                <div class="alert alert-danger mt-2">
-                    {% for error in form.username.errors %}
-                        <strong>{{ error }}</strong>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </div>
-        <div class="form-group mb-3">
-            <div class="input-group">
-                <span class="input-group-text bi bi-lock-fill" id="basic-addon1">1</span>
-                <input name="password1" type="password" class="form-control flex-fill" id="passwordInput1"
-                       placeholder="Parola" required/>
-                <button type="button" class="btn btn-warning"
-                        style=":focus {outline: none;  box-shadow: none;}"
-                        onclick="this.blur(); show_hide_password($('#passwordInput1'),$('#show-icon1'),$('#hide-icon1'));">
-                    <span id="show-icon1" class="bi bi-eye"></span>
-                    <span class="bi bi-eye-slash" id="hide-icon1" style="display: none;"></span>
-                </button>
-
-            </div>
-            {% if form.password.errors %}
-                <div class="alert alert-danger mt-2">
-                    {% for error in form.password.errors %}
-                        <strong>{{ error }}</strong>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </div>
-        <div class="form-group mb-3">
-            <div class="input-group">
-                <span class="input-group-text bi bi-lock-fill" id="basic-addon1">2</span>
-                <input name="password2" type="password" class="form-control" id="passwordInput2"
-                       placeholder="Confirmare parolei" required/>
-                <button type="button" class="btn btn-warning"
-                        style=":focus {outline: none;  box-shadow: none;}"
-                        onclick="this.blur(); show_hide_password($('#passwordInput2'),$('#show-icon2'),$('#hide-icon2'));">
-                    <span id="show-icon2" class="bi bi-eye"></span>
-                    <span id="hide-icon2" style="display: none;" class="bi bi-eye-slash"></span>
-                </button>
-            </div>
-        </div>
-    </form>
+    {% include 'registration/signup.html' %}
 {% endblock %}
 {% block modal-footer %}
-    <button type="submit" class="btn btn-success">Înregistrare</button>
+    <button onclick="submitSignup();" class="btn btn-success">Înregistrare</button>
     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Închide</button>
 {% endblock %}
