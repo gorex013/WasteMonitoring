@@ -77,7 +77,7 @@ DATABASES = {
         'NAME': 'waste',
         'USER': 'root_user',
         'PASSWORD': 'The_root_user1',
-        'HOST': 'db',  # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     },
 }
