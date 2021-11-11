@@ -14,7 +14,7 @@ services:
       - data:/var/lib/mysql
   web:
     build: .
-    command: python manage.py runserver 8000
+    command: sh -c "python manage.py migrate && python manage.py runserver 8000"
     volumes:
       - .:/code
     ports:
