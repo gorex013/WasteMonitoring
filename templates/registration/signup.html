@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block title %}
+    Registration
+{% endblock %}
+{% block css_js %}
+    <style>
+        body {
+            background-image: url("https://images.unsplash.com/photo-1544198365-f5d60b6d8190?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+    <script>
+        $(document).on('readystatechange',function () {
+            $('input').tooltip();
+        })
+    </script>
+{% endblock %}
+{% block content %}
+    {% if not user.is_authenticated %}
+        <div class="container d-flex flex-column justify-content-center bg-white border rounded mt-5 p-5">
+            <div class="row h-auto">
+                <h1 class="card-title">Registration</h1>
+
+                <form class="col-12" method="post" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    <div class="form-group required">
+                        {% for field in user_form %}
+                            <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}
+                                <i style="color: red">*</i>
+                            {% endif %}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in field.errors %}
+                                        <strong>{{ error|escape }}</strong>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% for field in client_form %}
+                            <label for="{{ field.id }}">{{ field.label }}{% if field.field.required %}
+                                <i style="color: red">*</i>
+                            {% endif %}</label>
+                            {{ field }}
+                        {% endfor %}
+                    </div>
+                    <div class="alert alert-info">
+                        <p>Fields with <i style="color: red">*</i> mean they are required.</p>
+                    </div>
+                    {% if user_form.non_field_errors %}
+                        <div class="alert alert-danger mt-2">
+                            {% for error in user_form.non_field_errors %}
+                                <strong>{{ error|escape }}</strong>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if client_form.non_field_errors %}
+                        <div class="alert alert-danger mt-2">
+                            {% for error in client_form.non_field_errors %}
+                                <strong>{{ error|escape }}</strong>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="location.href='{% url 'home' %}';">Back
+                        home
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    {% else %}
+        <meta http-equiv="REFRESH" content="0;url={% url 'home' %}">
+    {% endif %}
+{% endblock %}
