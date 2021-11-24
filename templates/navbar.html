@@ -14,12 +14,18 @@
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Statistici
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item text-danger"><i class="bi bi-graph-up"></i>Evoluția cantității de masă
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" onmouseover="$(this).show();"
+                     onmouseleave="$(this).hide(200);" id="list-of-classes-menu">
+                    <a class="dropdown-item text-danger" href="{% url 'graph' 'plastic' %}"><i
+                            class="bi bi-graph-up"></i>Evoluția
+                        cantității de masă
                         plastică</a>
-                    <a class="dropdown-item text-warning"><i class="bi bi-graph-up"></i>Evoluția cantității de
+                    <a class="dropdown-item text-warning" href="{% url 'graph' 'metal-sticla' %}"><i
+                            class=" bi bi-graph-up"></i>
+                        Evoluția cantității de
                         metal/sticlă</a>
-                    <a class="dropdown-item text-success"><i class="bi bi-graph-up"></i>Evoluția cantității de deșeuri
+                    <a class="dropdown-item text-success" href="{% url 'graph' 'bio' %}"><i class=" bi bi-graph-up"></i>
+                        Evoluția cantității de deșeuri
                         biodegradabile</a>
                 </div>
             </li>
