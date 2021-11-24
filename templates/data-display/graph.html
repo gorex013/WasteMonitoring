@@ -1,0 +1,100 @@
+<script type="text/javascript">
+    google.charts.load('current', {'packages': ['corechart', 'table']});
+    google.charts.setOnLoadCallback(loading);
+
+    function loading() {
+        const data = new google.visualization.arrayToDataTable(
+            [
+                ['Luna', 'Reciclat', 'Nereciclat', 'Media'],
+                ['Ianuarie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Februarie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Martie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Aprilie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Mai', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300]
+            ]
+        );
+        drawTable(data);
+        $('#tablebtn').on('click', () => {
+            drawTable(data);
+        })
+        $('#columnchartbtn').on('click', () => {
+            drawColumnChart(data)
+        });
+        $('#piechartbtn').on('click', () => {
+            drawComboChart(data)
+        });
+        $('#linechartbtn').on('click', () => {
+            drawLineChart(data)
+        })
+    }
+
+    function drawColumnChart(data) {
+        var options = {
+            title: '{{ type_name }} cantitate(sute kg)',
+            height: 700,
+            colors: ['#6ceca3', '#fd8a86', '#72daf1']
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    function drawTable(data) {
+        var options = {
+            showRowNumber: true,
+            title: '{{ type_name }} cantitate(sute kg)',
+            width: 900,
+        }
+        var table = new google.visualization.Table(document.getElementById('chart_div'));
+        table.draw(data, options);
+    }
+
+    function drawLineChart(data) {
+        var options = {
+            hAxis: {
+                title: 'Lunile anului'
+            },
+            vAxis: {
+                title: 'Cantitate colectată'
+            },
+            colors: ['#da9e98', '#95daad', '#8fb3da'],
+            height: 700,
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    function drawComboChart(data) {
+        var options = {
+            title: '{{ type_name }} cantitate(sute kg)',
+            hAxis: {
+                title: 'Lunile anului'
+            },
+            vAxis: {
+                title: 'Cantitate colectată'
+            },
+            seriesType: 'bars',
+            series: {2: {type: 'line'}},
+            colors: ['#1f6c42', '#943632', '#2d7b8c']
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <div class="btn-group btn-group-justified">
+                <button class="btn btn-outline-dark bi bi-table" id="tablebtn"></button>
+                <button class="btn btn-outline-dark bi bi-bar-chart-line" id="columnchartbtn"></button>
+                <button class="btn btn-outline-dark bi bi-pie-chart" id="piechartbtn"></button>
+                <button class="btn btn-outline-dark bi bi-graph-up" id="linechartbtn"></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="chart_div"></div>
+    </div>
+</div>

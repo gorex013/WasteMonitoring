@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block title %}
+    Mod de vizualizare
+{% endblock %}
+{% block css_js %}
+    <style>
+        body {
+            background-image: url('{% static 'show-graph.jpg' %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container border rounded mt-5 p-5 bg-light">
+        <div class="row h-auto bg-light">
+            <a class="col btn btn-outline-info p-5"
+               onmouseover="$(this).addClass('text-dark').css('font-weight', 'bold');"
+               onmouseleave="$(this).removeClass('text-dark').css('font-weight', 'normal');">
+                <i class="bi bi-table" style="font-size: xx-large;"></i><br>Tabel
+            </a>
+            <a class="col btn btn-outline-info p-5"
+               onmouseover="$(this).addClass('text-dark').css('font-weight', 'bold');"
+               onmouseleave="$(this).removeClass('text-dark').css('font-weight', 'normal');">
+                <i class="bi bi-bar-chart-line" style="font-size: xx-large;"></i><br>Bare
+            </a>
+            <a class="col btn btn-outline-info p-5"
+               onmouseover="$(this).addClass('text-dark').css('font-weight', 'bold');"
+               onmouseleave="$(this).removeClass('text-dark').css('font-weight', 'normal');">
+                <i class="bi bi-pie-chart" style="font-size: xx-large;"></i><br>Proporții
+            </a>
+            <a class="col btn btn-outline-info p-5"
+               onmouseover="$(this).addClass('text-dark').css('font-weight', 'bold');"
+               onmouseleave="$(this).removeClass('text-dark').css('font-weight', 'normal');">
+                <i class="bi bi-graph-up" style="font-size: xx-large;"></i><br>Linii
+            </a>
+        </div>
+    </div>
+{% endblock %}

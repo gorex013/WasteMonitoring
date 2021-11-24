@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar %}
+    {% include 'navbar.html' %}
+
+{% endblock %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+    <div class="container d-flex flex-column justify-content-center bg-white border rounded mt-5 p-5">
+        <div class="row h-auto">
+            <h1 class="card-title">{{ type_name }}</h1>
+            {% include 'data-display/graph.html' %}
+        </div>
+    </div>
+{% endblock %}
+{% block css_js %}
+    <style>
+        body {
+            background-image: url('{% static image %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
