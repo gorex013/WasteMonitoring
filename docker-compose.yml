@@ -1,6 +1,6 @@
 version: "3.3"
 services:
-  localhost:
+  db:
     image: mysql:5.7
     restart: always
     environment:
@@ -18,8 +18,8 @@ services:
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     depends_on:
-      - localhost
+      - db
 volumes:
   data:
