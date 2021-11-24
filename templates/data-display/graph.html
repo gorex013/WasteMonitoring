@@ -10,7 +10,14 @@
                 ['Februarie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
                 ['Martie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
                 ['Aprilie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
-                ['Mai', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300]
+                ['Mai', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Iunie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Iulie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['August', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Septembrie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Octombrie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Noiembrie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
+                ['Decembrie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
             ]
         );
         drawTable(data);
@@ -75,7 +82,8 @@
             },
             seriesType: 'bars',
             series: {2: {type: 'line'}},
-            colors: ['#1f6c42', '#943632', '#2d7b8c']
+            colors: ['#41f594', '#ff645e', '#49b7fc'],
+            height: 700,
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
