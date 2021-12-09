@@ -1,7 +1,9 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import TemplateView
 
-from waste_monitoring.forms import SignUpForm
+from waste_monitoring.forms import SignUpForm, DataIntroductionForm
 
 
 class HomeView(TemplateView):
@@ -26,7 +28,7 @@ class SignupView(TemplateView):
             user = self.user_form.save(commit=False)
             user.email = self.user_form.data['username']
             user.save()
-            return redirect(request=request, to='login', *args, **kwargs)
+            return redirect(to='login', *args, **kwargs)
         return render(request, self.template_name, {
             'user_form': self.user_form,
         }, *args, **kwargs)
@@ -69,3 +71,28 @@ class ChooseGraphTypeView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         return self.render_to_response({})
+
+
+class InsertDataView(TemplateView):
+    template_name = 'data-insert-form.html'
+    waste_form = DataIntroductionForm()
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            # login = reverse(LoginView)
+            # print(login)
+            # return LoginView.as_view(context={'login_message': 'Trebui să fii logat ca să poți introduce date!'})
+            return redirect('login')
+        # if has_permission  request.user
+        return self.render_to_response({'form': self.waste_form})
+
+    def post(self, request, *args, **kwargs):
+        self.waste_form = DataIntroductionForm(request.POST)
+        if self.waste_form.is_valid():
+            data = self.waste_form.save(commit=False)
+            data.user_id = request.user.id
+            data.save()
+            self.waste_form = DataIntroductionForm()
+            return self.render_to_response(
+                {'message': 'Datele au fost introduse cu succes!', 'type': 'success', 'form': self.waste_form})
+        return self.render_to_response({'form': self.waste_form})

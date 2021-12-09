@@ -3,33 +3,38 @@
     {% include 'navbar.html' %}
 {% endblock %}
 {% block title %}
-    Înregistrare
+Adăugare date
 {% endblock %}
 {% block css_js %}
     <style>
         body {
-            background-image: url("https://images.unsplash.com/photo-1544198365-f5d60b6d8190?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+            background-image: url("https://images.unsplash.com/photo-1483736762161-1d107f3c78e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
             background-size: cover;
             background-repeat: no-repeat;
         }
 
     </style>
     <script>
-        $(document).on('readystatechange',function () {
+        $(document).on('readystatechange', function () {
             $('input').tooltip();
         })
     </script>
 {% endblock %}
 {% block content %}
-    {% if not user.is_authenticated %}
+    {% if user.is_authenticated %}
         <div class="container d-flex flex-column justify-content-center bg-white border rounded mt-5 p-5">
             <div class="row h-auto">
-                <h1 class="card-title">Registration</h1>
-
-                <form class="col-12" method="post" action="{% url 'signup' %}">
+                <div class="container">
+                    <h1 class="card-title">Adăugare date</h1></div>
+                {% if message %}
+                    <div class="alert alert-{{ type }} container d-flex justify-content-center">
+                        <strong>{{ message }}</strong></div>
+                {% endif %}
+                <form class="col-12" method="post" action="{% url 'insert-data' %}">
                     {% csrf_token %}
+                    <input name="user_id" value="{{ request.user.id }}" hidden/>
                     <div class="form-group required">
-                        {% for field in user_form %}
+                        {% for field in form %}
                             <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}
                                 <i style="color: red">*</i>
                             {% endif %}</label>
@@ -53,7 +58,7 @@
                             {% endfor %}
                         </div>
                     {% endif %}
-                    <button type="submit" class="btn btn-success">Înregistrare</button>
+                    <button type="submit" class="btn btn-success">Înscrie în baza de date</button>
                     <button type="button" class="btn btn-outline-danger" onclick="location.href='{% url 'home' %}';">
                         Înapoi la principală
                     </button>
@@ -61,7 +66,5 @@
 
             </div>
         </div>
-    {% else %}
-        <meta http-equiv="REFRESH" content="0;url={% url 'home' %}">
     {% endif %}
 {% endblock %}

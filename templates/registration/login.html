@@ -3,7 +3,7 @@
     {% include 'navbar.html' %}
 {% endblock %}
 {% block title %}
-    Login
+    Autentificare
 {% endblock %}
 {% block css_js %}
     <style>
@@ -33,9 +33,9 @@
         <div class="container d-flex flex-column justify-content-center bg-white border rounded my-5 pt-1 px-3 pb-3">
             <div class="col-sm-12">
                 <h1 class="card-title">Sign in</h1>
-                {% if request.session.warning_message %}
-                    <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
-                        {{ request.session.warning_message }}
+                {% if login_message %}
+                    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        {{ login_message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -75,7 +75,7 @@
                             </svg>
                           </span>
                             <input name="password" type="password" class="form-control" id="passwordInput"
-                                   placeholder="Password" required/>
+                                   placeholder="Parola" required/>
                             <button type="button" class="btn btn-warning"
                                     style=":focus {outline: none;  box-shadow: none;}"
                                     onclick="this.blur(); show_hide_password($('#passwordInput'),$('#show-icon'),$('#hide-icon'));">
@@ -105,8 +105,8 @@
                         {% endif %}
                     </div>
                     <div class="inline-group">
-                        <button type="submit" class="btn btn-primary">Log in</button>
-                        <a class="password-reset-link px-3" href="{% url 'password_reset' %}">Password reset</a>
+                        <button type="submit" class="btn btn-primary">Autentifică</button>
+                        <a class="password-reset-link px-3" href="{% url 'password_reset' %}">Resetează parola</a>
                     </div>
                 </form>
                 {% if form.non_field_errors %}

@@ -3,12 +3,12 @@
     <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
 {% endblock %}
 {% block modal-body %}
-    Are you sure you want to log out?
+    Sunteți sigur că doriți să vă delogați?
 {% endblock %}
 {% block modal-footer %}
 
-    <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+    <button type="button" class="btn btn-success" data-dismiss="modal">Nu</button>
     <button type="button" class="btn btn-outline-danger" onclick="location.href ='{% url 'logout' %}';">
-        Yes
+        Da
     </button>
 {% endblock %}

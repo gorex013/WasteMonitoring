@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    google.charts.load('current', {'packages': ['corechart', 'table']});
+    google.charts.load('current', {'packages': ['corechart', 'table', 'controls']});
     google.charts.setOnLoadCallback(loading);
 
     function loading() {
@@ -20,6 +20,8 @@
                 ['Decembrie', 201 + Math.random() * 300, 201 + Math.random() * 300, 201 + Math.random() * 300],
             ]
         );
+        var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
         drawTable(data);
         $('#tablebtn').on('click', () => {
             drawTable(data);
@@ -28,11 +30,13 @@
             drawColumnChart(data)
         });
         $('#piechartbtn').on('click', () => {
-            drawComboChart(data)
+            drawComboChart(data, dashboard)
         });
         $('#linechartbtn').on('click', () => {
             drawLineChart(data)
         })
+
+
     }
 
     function drawColumnChart(data) {
@@ -47,16 +51,40 @@
 
     function drawTable(data) {
         var options = {
-            showRowNumber: true,
             title: '{{ type_name }} cantitate(sute kg)',
+            showRowNumber: true,
             width: 900,
         }
         var table = new google.visualization.Table(document.getElementById('chart_div'));
         table.draw(data, options);
+        google.visualization.events.addListener(table, 'select', selectHandler);
+
+        function selectHandler() {
+            var selection = table.getSelection();
+            var message = '';
+            for (var i = 0; i < selection.length; i++) {
+                var item = selection[i];
+                if (item.row != null && item.column != null) {
+                    var str = data.getFormattedValue(item.row, item.column);
+                    message += '{row:' + item.row + ',column:' + item.column + '} = ' + str + '\n';
+                } else if (item.row != null) {
+                    var str = data.getFormattedValue(item.row, 0);
+                    message += '{row:' + item.row + ', column:none}; value (col 0) = ' + str + '\n';
+                } else if (item.column != null) {
+                    var str = data.getFormattedValue(0, item.column);
+                    message += '{row:none, column:' + item.column + '}; value (row 0) = ' + str + '\n';
+                }
+            }
+            if (message == '') {
+                message = 'nothing';
+            }
+            alert('You selected ' + message);
+        }
     }
 
     function drawLineChart(data) {
         var options = {
+            title: '{{ type_name }} cantitate(sute kg)',
             hAxis: {
                 title: 'Lunile anului'
             },
@@ -72,6 +100,33 @@
     }
 
     function drawComboChart(data) {
+        /*var donutRangeSlider = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'filter_div',
+          'options': {
+            'filterColumnLabel': 'Luna'
+          }
+        });
+
+        // Create a pie chart, passing some options
+        var pieChart = new google.visualization.ChartWrapper({
+          chartType: 'ComboChart',
+          containerId: 'chart_div',
+          options: {
+            width: 300,
+            height: 300,
+            pieSliceText: 'value',
+            legend: 'right'
+          }
+        });
+
+        // Establish dependencies, declaring that 'filter' drives 'pieChart',
+        // so that the pie chart will only display entries that are let through
+        // given the chosen slider range.
+        dashboard.bind(donutRangeSlider, pieChart);
+
+        // Draw the dashboard.
+        dashboard.draw(data);*/
         var options = {
             title: '{{ type_name }} cantitate(sute kg)',
             hAxis: {
@@ -84,7 +139,7 @@
             series: {2: {type: 'line'}},
             colors: ['#41f594', '#ff645e', '#49b7fc'],
             height: 700,
-        };
+         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
@@ -103,6 +158,26 @@
         </div>
     </div>
     <div class="row">
-        <div id="chart_div"></div>
+        <div id="dashboard_div">
+            <div id="chart_div"></div>
+            <div id="filter_div"></div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-8"></div>
+        <div class="col">
+            <div class="btn-group">
+                <button class="btn btn-outline-dark" onmouseover="$(this).css('font-weight', 'bold');"
+                        onmouseleave="$(this).css('font-weight', 'normal')">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    Vizualizează <code>*.csv</code>
+                </button>
+                <button class="btn btn-outline-dark" onmouseover="$(this).css('font-weight', 'bold');"
+                        onmouseleave="$(this).css('font-weight', 'normal')">
+                    Descarcă
+                    <i class="bi bi-download"></i>
+                </button>
+            </div>
+        </div>
     </div>
 </div>

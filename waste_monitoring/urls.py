@@ -24,5 +24,6 @@ urlpatterns = [
     path('signup/', SignupView.as_view(), name='signup'),
     path('', include('django.contrib.auth.urls')),
     path('show-graph/<str:type_id>', ShowGraphView.as_view(), name='graph'),
-    path('show-graph/', ChooseGraphTypeView.as_view(), name='show-graph')
+    path('show-graph/', ChooseGraphTypeView.as_view(), name='show-graph'),
+    path('insert-data/', InsertDataView.as_view(), name='insert-data')
 ]
